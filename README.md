@@ -16,6 +16,9 @@ direccion varchar(250) not null,
 correo varchar(150) not null,
 );
 
+//
+
+
 create or alter procedure dbo.eliminar_cliente
 @id AS INT
 AS
