@@ -1,4 +1,4 @@
-package com.example.examen.Model;
+package com.example.examen.DTO;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
@@ -6,70 +6,49 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
-import javax.persistence.*;
-import javax.validation.constraints.*;
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.util.Date;
 
-@Entity
-@Table(name = "cliente")
-@NamedStoredProcedureQueries({
-        @NamedStoredProcedureQuery(
-                name = "Cliente.eliminarCliente",
-                procedureName = "eliminar_cliente",
-                parameters = {
-                        @StoredProcedureParameter(name = "id", mode = ParameterMode.IN, type = Integer.class),
-                }
-        )
-})
-public class Cliente {
 
-    @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+public class ClienteDTO {
+
+
     @Column(name = "id_cliente")
     private Integer idCliente;
 
-    @NotNull
-    @NotBlank
-    @Pattern(regexp = "^[a-zA-Z ]*$", message = "Solo se permiten letras")
+
     @Column(name = "nombres")
     private String nombres;
 
-    @NotNull
-    @NotBlank
     @Column(name = "apellido_paterno")
-    @Pattern(regexp = "^[a-zA-Z ]*$", message = "Solo se permiten letras")
     private String apellidoPaterno;
 
-    @NotNull
-    @NotBlank
-    @Column(name = "apellido_materno")
-    @Pattern(regexp = "^[a-zA-Z ]*$", message = "Solo se permiten letras")
+    @Column(name = "apellido_Materno")
     private String apellidoMaterno;
 
-    @NotNull
-    @JsonFormat(pattern="dd-MM-yyyy")
     @Column(name = "fecha_nacimiento")
     private Date fechaNacimiento;
 
-    @NotNull
     @Column(name = "sexo")
     private Integer sexo;
 
-    @NotNull
-    @NotBlank
     @Column(name = "direccion")
     private String direccion;
 
-    @NotNull
-    @NotBlank
     @Column(name = "correo")
-    @Pattern(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$", message = "Correo tiene que ser valido")
     private String correo;
 
-    public Cliente() {
+
+    public ClienteDTO() {
     }
 
-    public Cliente(Integer idCliente, String nombres, String apellidoPaterno, String apellidoMaterno,
+    public ClienteDTO(Integer idCliente, String nombres, String apellidoPaterno, String apellidoMaterno,
                    Date fechaNacimiento, Integer sexo, String direccion, String correo) {
         this.idCliente = idCliente;
         this.nombres = nombres;
